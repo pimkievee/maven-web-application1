@@ -33,7 +33,7 @@ node{
 
 check build''', recipientProviders: [developers(), buildUser(), contributor(), brokenBuildSuspects(), brokenTestsSuspects()], subject: 'Build Status', to: 'valerieomo8@gmail.com'
 }
-
-Footer
 /*
 }
+Footer
+
