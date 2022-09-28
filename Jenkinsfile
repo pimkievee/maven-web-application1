@@ -7,7 +7,7 @@ pipeline{
     stage('1GetCode'){
       steps{
         sh "echo 'cloning the latest application version' "
-        git branch: 'feature', credentialsId: 'gitHubCredentials', url: 'https://github.com/LandmakTechnology/maven-web-application'
+       git branch: 'feature', url: 'https://github.com/pimkievee/maven-web-application1'
       }
     }
     stage('3Test+Build'){
@@ -28,39 +28,32 @@ pipeline{
       steps{
         sh "mvn deploy"
       }
-    } 
+    }
     stage('8deploy2prod'){
       steps{
-        deploy adapters: [tomcat8(credentialsId: 'tomcat-credentials', path: '', url: 'http://35.170.249.131:8080/')], contextPath: null, war: 'target/*war'
-      }
+          deploy adapters: [tomcat9(credentialsId: 'tomcat9credentials', path: '', url: 'http://54.174.130.109:8080/')], contextPath: null, war: 'target/*war'
+  }
     }
-}
-  post{
+  }
+    post{
     always{
-      emailext body: '''Hey guys
-Please check build status.
-
+emailext body: '''Hey guys,
+please. check build status
 Thanks
-Landmark 
-+1 437 215 2483''', recipientProviders: [buildUser(), developers()], subject: 'success', to: 'paypal-team@gmail.com'
+Landmark''', recipientProviders: [buildUser(), developers()], subject: 'Success', to: 'valerieomo8@gmail.com'      
     }
     success{
-      emailext body: '''Hey guys
-Good job build and deployment is successful.
-
+      emailext body: '''Hey guys,
+Good job. build and deployment is a success
 Thanks
-Landmark 
-+1 437 215 2483''', recipientProviders: [buildUser(), developers()], subject: 'success', to: 'paypal-team@gmail.com'
+Landmark''', recipientProviders: [buildUser(), developers()], subject: 'Success', to: 'valerieomo8@gmail.com'
     } 
     failure{
-      emailext body: '''Hey guys
-Build failed. Please resolve issues.
-
+        emailext body: '''Hey guys,
+Build fail. please resolve issus
 Thanks
-Landmark 
-+1 437 215 2483''', recipientProviders: [buildUser(), developers()], subject: 'success', to: 'paypal-team@gmail.com'
+Landmark''', recipientProviders: [buildUser(), developers()], subject: 'Success', to: 'valerieomo8@gmail.com'
     }
-  } 
+  }  
   */
-}
-}
+  }
